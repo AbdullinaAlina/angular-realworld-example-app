@@ -80,12 +80,12 @@ export default class AuthComponent implements OnInit {
             },
           );
 
-    observable.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => void this.router.navigate(["/"]),
-      error: (err) => {
-        this.errors = err;
-        this.isSubmitting = false;
-      },
-    });
+    // observable.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    //   next: () => void this.router.navigate(["/"]),
+    //   error: (err) => {
+    //     this.errors = err;
+    //     this.isSubmitting = false;
+    //   },
+    // });
   }
 }

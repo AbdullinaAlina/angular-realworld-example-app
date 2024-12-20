@@ -14,6 +14,7 @@ import { ProfileService } from "../../services/profile.service";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FollowButtonComponent } from "../../components/follow-button.component";
+import { mockUser } from "src/app/mockUser";
 
 @Component({
   selector: "app-profile-page",
@@ -41,23 +42,31 @@ export class ProfileComponent implements OnInit {
     private readonly profileService: ProfileService,
   ) {}
 
+  // ngOnInit() { // You need to modify this for Task 3
+  //   this.profileService
+  //     .get(this.route.snapshot.params["username"])
+  //     .pipe(
+  //       // catchError((error) => {
+  //       //   void this.router.navigate(["/"]);
+  //       //   return throwError(() => error);
+  //       // }),
+  //       switchMap((profile) => {
+  //         return combineLatest([of(profile), this.userService.currentUser]);
+  //       }),
+  //       takeUntilDestroyed(this.destroyRef),
+  //     )
+  //     .subscribe(([profile, user]) => {
+  //       this.profile = profile;
+  //       this.isUser = profile.username === user?.username;
+  //     });
+  // }
+
   ngOnInit() { // You need to modify this for Task 3
-    this.profileService
-      .get(this.route.snapshot.params["username"])
-      .pipe(
-        // catchError((error) => {
-        //   void this.router.navigate(["/"]);
-        //   return throwError(() => error);
-        // }),
-        switchMap((profile) => {
-          return combineLatest([of(profile), this.userService.currentUser]);
-        }),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(([profile, user]) => {
-        this.profile = profile;
-        this.isUser = profile.username === user?.username;
-      });
+    console.log(this.route.snapshot.params["username"]);
+    if (this.route.snapshot.params["username"] === "smth"){
+      this.profile = mockUser;
+    }
+  
   }
 
   onToggleFollowing(profile: Profile) {
